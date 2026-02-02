@@ -1,0 +1,59 @@
+from flask import Flask, render_template, request
+import joblib
+
+# 載入模型
+model = joblib.load('model.joblib')
+
+# 創建Flask應用程序
+app = Flask(__name__)
+
+# 創建路由，用於處理HTTP GET請求
+@app.route('/', methods=['GET'])
+def home():
+    return render_template('index.html')
+
+# 創建路由，用於處理HTTP POST請求
+@app.route('/predict', methods=['POST'])
+def predict():
+    # 從HTML表單中獲取數據
+    input_data = request.form['input_data']
+
+    # 使用模型進行預測
+    prediction = model.predict(input_data)
+
+    # 返回預測結果到HTML頁面
+    return render_template('result.html', prediction=prediction)
+
+# 啟動Flask應用程序
+if __name__ == '__main__':
+    app.run(debug=True)
+
+#
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route("/")
+def index():
+    return "HELLO"
+    
+if __name__ == "__main__":
+    app.run()
+
+
+    #
+    @app.route('/submit', methods=['POST'])
+def submit():
+    name = request.form['name']
+    q1 = request.form['q1']
+    q2 = request.form['q2']
+    q3 = request.form['q3']
+    
+    data = {
+        'name': name,
+        'q1': q1,
+        'q2': q2,
+        'q3': q3
+    }
+    
+    #return data

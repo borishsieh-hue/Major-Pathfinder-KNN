@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>My Form</title>
+  <style>
+    body {
+      background-image: url("{{ url_for('static', filename='images/propic.png') }}");
+      background-size: 100%;
+      background-repeat: no-repeat;
+      background-position: top;
+      color: #333;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 4rem;
+      text-align: center;
+      
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-top: 1.5rem;
+    }
+
+    h2 {
+      color: #1E3A8A;
+      font-size: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    p {
+      font-size: 1.2rem;
+      line-height: 1.5;
+      margin-top: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    img {
+      display: block;
+      margin: 0 auto;
+      width: 250px;
+      margin-top: 5rem;
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h2>為您推薦的主修科系為:</h2>
+  <h1>國際企業管理主學程</h1>
+  <h2>特點：</h2><p>實踐型，較擅長與人交流、交際，興趣方面會較為廣泛，因為國企有許多報告，可以增加簡報能力，上台報告能力。</p>
+  <h2>未來職業：</h2><p>保險業務員、行銷人員、產品分析師等等等。</p>
+  <img src="{{ url_for('static', filename='images/loge.png') }}" alt="Example Image">
+</div>
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+  <title>My Form</title>
+	<style>
+		body {
+			background-color: #f7f7f7;
+			font-family: Arial, sans-serif;
+		}
+		h1 {
+			font-size: 36px;
+			font-weight: bold;
+			text-align: center;
+			margin-top: 50px;
+			margin-bottom: 30px;
+			color: #222;
+		}
+		form {
+			max-width: 600px;
+			margin: 0 auto;
+			padding: 40px;
+			background-color: #fff;
+			box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+			border-radius: 5px;
+		}
+		label {
+			display: block;
+			font-size: 18px;
+			font-weight: bold;
+			margin-bottom: 10px;
+			color: #333;
+		}
+		input[type="text"], input[type="email"], textarea, select {
+			display: block;
+			width: 100%;
+			padding: 12px;
+			margin-bottom: 20px;
+			border: none;
+			border-radius: 5px;
+			background-color: #f7f7f7;
+			box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.2);
+			color: #333;
+			font-size: 16px;
+			font-family: Arial, sans-serif;
+		}
+		input[type="submit"] {
+			display: inline-block;
+			padding: 12px 20px;
+			margin-top: 20px;
+			border: none;
+			border-radius: 5px;
+			background-color: #222;
+			color: #fff;
+			font-size: 18px;
+			font-weight: bold;
+			text-align: center;
+			text-decoration: none;
+			cursor: pointer;
+			transition: background-color 0.2s ease-in-out;
+		}
+		input[type="submit"]:hover {
+			background-color: #333;
+		}
+		#p {
+			background-image:url({{url_for('static', filename='images/pbk.png') }});
+			border: 2px solid #333;
+			font-size: 16px;
+			color: #333;
+			background-repeat: no-repeat;
+			background-size: 600px 330px;
+		}
+		#chi-nan{
+			position: absolute;
+			right:28%;
+			top:345px;
+		}
+		#ty{
+			position: absolute;
+			right: 300px;
+			top:2130px;
+		}
+		#bk{
+			position:absolute;
+			top:10px;
+			right:29%;
+		}
+
+	</style>
+</head>
+<body>
+  <h1 >專題問卷</h1>
+  <form action="submit" method="post">
+  	<div id="p"><p>
+	您好：</br>此分析只適用於管院學士班的同學。旨在向還沒選定主修學程的你/妳推薦一個最適合你的主修學程，請依你的真實情況填答每個問題，系統會用答案代入我們的模型，從而推薦出最適合你的主修學程，當然，只是作為參考用。希望這個分析系統能在你們選擇主要學程的時候幫上忙。感謝你/妳的填答</br>&nbsp; &nbsp; &nbsp; &nbsp; 敬祝</br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 健康愉快</p></br></br></br></div></br>
+    <label for="q2">1. 對於上課學習寫程式有沒有興趣? 以 1～5 分做選擇</br>(1 最沒興趣～5 最有興趣)</label>
+    <select id="q2" name="q2" required>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+	  <option value="4">4</option>
+      <option value="5">5</option>
+    </select>
+	<label for="q3">2. 對於 AI 相關課程有沒有興趣? 以 1～5 分做選擇</br>(1 最不喜歡～5 最喜歡)</label>
+    <select id="q3" name="q3" required>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+	  <option value="4">4</option>
+      <option value="5">5</option>
+    </select>
+	<label for="q4">3. 喜不喜歡高中電腦資訊課的課程內容? 以 1～5 分做選擇</br>(1 最不喜歡～5 最喜歡) </label>
+    <select id="q4" name="q4" required>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+	  <option value="4">4</option>
+      <option value="5">5</option>
+    </select>
+	<label for="q5">4. 對企業的行銷是否有興趣? 以 1～5 分做選擇</br>(1 最沒興趣～5 最有興趣)</label>
+    <select id="q5" name="q5" required>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+	  <option value="4">4</option>
+      <option value="5">5</option>
+    </select>
+	<label for="q6">5. 你是否想要在大學培養溝通能力以及國際視野能力?以 1～5 分做選擇</br>(1 最不想～5 最想)</label>
+    <select id="q6" name="q6" required>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+	  <option value="4">4</option>
+      <option value="5">5</option>
+    </select>
+	<label for="q7">6. 對於培養創業、創新能力相關課程有沒有興趣?以 1～5 分做選擇</br>(1 最沒興趣～5 最有興趣)</label>
+    <select id="q7" name="q7" required>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+	  <option value="4">4</option>
+      <option value="5">5</option>
+    </select>
+	<label for="q8">7. 對國際相關的新聞有沒有興趣? 以 1～5 分做選擇</br>(1 最沒興趣～5 最有興趣)</label>
+    <select id="q8" name="q8" required>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+	  <option value="4">4</option>
+      <option value="5">5</option>
+    </select>
+	<label for="q9">8. 對企業管理相關課程是否有興趣? 以 1～5 分做選擇</br>(1 最沒興趣～5 最有興趣)</label>
+    <select id="q9" name="q9" required>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+	  <option value="4">4</option>
+      <option value="5">5</option>
+    </select>
+	<label for="q10">9. 喜不喜歡高中公民課的課程內容? 以 1～5 分做選擇</br>(1 最不喜歡～5 最喜歡)</label>
+    <select id="q10" name="q10" required>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+	  <option value="4">4</option>
+      <option value="5">5</option>
+    </select>
+	<label for="q11">10. 對財經相關的新聞有沒有興趣? 以 1～5 分做選擇</br>(1 最沒興趣～5 最有興趣)</label>
+    <select id="q11" name="q11" required>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+	  <option value="4">4</option>
+      <option value="5">5</option>
+    </select>
+	<label for="q12">11. 會排斥高中時上的微積分課程嗎? 以 1～5 分做選擇</br>(1 最排斥～5 最不排斥)</label>
+    <select id="q12" name="q12" required>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+	  <option value="4">4</option>
+      <option value="5">5</option>
+    </select>
+	<label for="q13">12. 對投資理財有沒有興趣? 以 1～5 分做選擇</br>(1 最沒興趣～5 最有興趣)</label>
+    <select id="q13" name="q13" required>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+	  <option value="4">4</option>
+      <option value="5">5</option>
+    </select>
+	<label for="q14">13. 對於經濟理論以及數理分析的相關課程有沒有興趣?</br>(1 最沒興趣～5 最有興趣)</label>
+    <select id="q14" name="q14" required>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+	  <option value="4">4</option>
+      <option value="5">5</option>
+    </select>
+	<label for="q15">14. 對於學習金融商品應用相關課程有沒有興趣? 以 1～5 分做選擇</br>(1 最沒興趣～5 最有興趣)</label>
+    <select id="q15" name="q15" required>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+	  <option value="4">4</option>
+      <option value="5">5</option>
+    </select>
+	</br>
+    <input type="submit" value="Submit">
+  </form>
+	<img id="ty" src="{{ url_for('static', filename='images/ty.png') }}" width="250px"></img>
+	<img id="chi-nan" src="{{ url_for('static', filename='images/loge.png') }}" width="250px"></img>
+	<img id="bk" src="{{ url_for('static', filename='images/title.png') }}" width="550px"></img>
+</body>
+</html>
+

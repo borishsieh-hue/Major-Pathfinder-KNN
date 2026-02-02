@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>My Form</title>
+  <style>
+    
+    body {
+      background-image: url("{{ url_for('static', filename='images/propic.png') }}");
+      background-size: 100%;
+      background-repeat: no-repeat;
+      background-position: top;
+      color: #333;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 4rem;
+      text-align: center;
+      
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-top: 1.5rem;
+    }
+
+    h2 {
+      color: #1E3A8A;
+      font-size: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    p {
+      font-size: 1.2rem;
+      line-height: 1.5;
+      margin-top: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    img {
+      display: block;
+      margin: 0 auto;
+      width: 250px;
+      margin-top: 5rem;
+      margin-bottom: 1rem;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    
+    <h2>為您推薦的主修科系為:</h2>
+    <h1>資訊管理主學程</h1>
+    <h2>特點：</h2>
+    <p>擅長推理、認真、執著、喜歡解決問題、善於溝通、並且讓資訊系統成為組織或企業策略的主要促成者或執行者。</p>
+    <h2>未來職業：</h2>
+    <p>可從事人工智慧、大數據分析、機器人程式設計、App開發、網頁設計、系統工程、網路管理、資訊安全等方面。</p>
+    <img src="{{ url_for('static', filename='images/loge.png') }}" alt="Example Image">
+  </div>
+</body>
+</html>
+
+
+
+
+
+
