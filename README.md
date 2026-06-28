@@ -1,6 +1,6 @@
 # Cross-Modal Alignment of Chest X-ray Images and Clinical Text for Interpretable Diagnosis
 
-Team project — *Happy Coding* team
+Author - 
 **Cheng-Chin (Boris) Hsieh, Jenny Yang, Shirley Chiu, Chitse Chiang**
 
 ## Overview
