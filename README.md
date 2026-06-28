@@ -50,10 +50,6 @@ MultiModal-Project/
 
 All notebooks run on **Google Colab** with no local setup. Start with `Cross-Modal_Alignment_MIMIC-CXR.ipynb`, which covers preprocessing, training, evaluation, and Grad-CAM visualization. Baseline notebooks under `models/` can be run independently.
 
-## Full Report
-
-See [Final_Project_Report.pdf](./Final_Project_Report.pdf) for the complete write-up, including methodology, statistical significance testing, qualitative Grad-CAM analysis, limitations, and proposed future work.
-
 ## Dependencies
 
 `torch`, `torchvision`, `transformers`, `datasets`, `scikit-learn`, `matplotlib`, `numpy`, `opencv-python`
