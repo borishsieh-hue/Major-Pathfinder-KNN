@@ -1,60 +1,63 @@
-# Suitability Analysis of College Majors Using Supervised Learning
+# Cross-Modal Alignment of Chest X-ray Images and Clinical Text for Interpretable Diagnosis
 
+Team project — *Happy Coding* team
+**Cheng-Chin (Boris) Hsieh, Jenny Yang, Shirley Chiu, Chitse Chiang**
 
-![Field](https://img.shields.io/badge/Field-Education%20Data%20Mining-blue)
-![Methodology](https://img.shields.io/badge/Method-Supervised%20Learning-orange)
+## Overview
 
-This research project, conducted at **National Chi Nan University**, applies supervised machine learning to help undergraduate students in the College of Management select the academic major that best fits their performance and potential.
+This project builds a multimodal framework that integrates chest X-ray images and radiology reports to predict **Pneumonia** and **Pneumothorax**, using [CheXbert](https://arxiv.org/abs/2004.09167)-derived labels from the MIMIC-CXR dataset. We compare three fusion strategies — **early fusion, late fusion, and cross-attention** — and use Grad-CAM and attention-map alignment analysis to evaluate whether the model's predictions are grounded in genuine cross-modal reasoning or driven primarily by one modality.
 
-## 📌 Motivation & Objectives
-With the rise of interdisciplinary learning, students often face "major selection anxiety." This study aims to reduce the mismatch between student capabilities and their chosen majors by analyzing historical academic data.
+## My Contribution (Boris Hsieh)
 
-* **The Problem**: Many students struggle to identify which major (Information Management, Finance, Business Administration, etc.) aligns with their academic strengths.
-* **The Goal**: Build a predictive model that uses early-semester grades to suggest the most suitable academic path.
+*(fill in — e.g. "Co-designed the cross-attention architecture and led the Grad-CAM / attention-alignment analysis (Section 4.4); implemented the bootstrap confidence interval significance testing (Section 4.2)")*
 
----
+## Architecture
 
-## 📌 Why KNN for Major Suitability?
-In this study, we identified **KNN** as a key classifier because academic performance patterns tend to "cluster." Students with similar grades in core foundation courses (like Accounting or Programming) often excel in the same specialized majors.
+- **Image encoder**: DenseNet-121, pretrained on MIMIC-CXR via `torchxrayvision`
+- **Text encoder**: BioClinicalBERT (pretrained on MIMIC-III clinical notes), first 8 layers frozen
+- **Fusion strategies compared**:
+  - *Early fusion* — broadcast-add of text [CLS] embedding into image feature map
+  - *Late fusion* — concatenation of pooled image + text features → MLP classifier
+  - *Cross-attention* — text tokens as Query, image patches as Key/Value
 
-### How KNN Works in This Project:
-1. **Feature Space**: Each student is represented as a data point in a multi-dimensional space, where each dimension is a score from a specific core course.
-2. **Similarity Measurement**: The model calculates the **Euclidean Distance** between a new student's grades and the historical data of seniors who have already completed their majors.
-3. **Voting (K-Value)**: By looking at the *K* most similar "neighbors" (seniors), the model assigns the student to the major that is most frequent among those neighbors.
+## Dataset
 
----
+- Source: [MIMIC-CXR](https://physionet.org/content/mimic-cxr/) chest X-rays + radiology reports, labeled via CheXbert
+- After filtering out uncertain (-1) labels: **6,611 records** (5,708 train / 446 val / 457 test), focused on Pneumonia and Pneumothorax
+- Hosted on Hugging Face: [cchitse/mimic-cxr-with-chexbert-labels](https://huggingface.co/datasets/cchitse/mimic-cxr-with-chexbert-labels)
 
-## 🛠️ Implementation Details
+## Results
 
-### 1. Data Processing for KNN
-* **Data Collection**  We collected 100 data from current students through distributing surveys.
-* **Feature Selection**: We focused on "Indicator Courses" that distinguish majors, such as *Intro to Programming* for IM majors and *Financial Management* for Finance majors.
-* **Normalization (Crucial for KNN)**: Since KNN relies on distance, we normalized all grades to a consistent scale (0 to 1) to prevent courses with higher credit weights from dominating the distance calculation.
+| Strategy | Mean AUROC (val) |
+|---|---|
+| Late Fusion | 91.8% |
+| Early Fusion | 91.3% |
+| Cross-Attention | 91.2% |
 
-### 2. Hyperparameter Tuning
-* **Optimal K-Value**: We performed cross-validation to find the best `K`. A small `K` might be sensitive to noise (outliers), while a large `K` might include students with different academic profiles.
-* **Distance Metrics**: Evaluated different ways to measure "academic similarity," ensuring that the most relevant subjects had the proper impact on the prediction.
+95% bootstrap confidence intervals (1,000 resamples) showed overlapping ranges across all three strategies — the architectural differences were within natural variation, not statistically distinct.
 
----
+**Key finding**: the text-only branch alone reached ~91% AUROC, nearly matching full fusion, while image-only reached only ~69–70%. Grad-CAM vs. attention-map alignment (Pearson r) varied widely (-0.6 to 0.6) across patients, indicating the model's cross-modal grounding was inconsistent — a core limitation discussed in the full report below.
 
-## 📊 Performance Analysis: KNN Results
-* **Instance-Based Learning**: Unlike models that create general rules, KNN effectively captured the "unique academic footprints" of students in different tracks.
-* **Interpretability**: KNN allowed us to explain to students: *"You are recommended for this major because your grade profile is 85% similar to successful students in this track."*
-* **Comparative Advantage**: While we tested SVM and Random Forest, KNN provided a highly intuitive baseline for **personalized academic counseling**.
+## Repository Structure
 
+```
+MultiModal-Project/
+├── Cross-Modal_Alignment_MIMIC-CXR.ipynb       # Main notebook: full pipeline
+├── huggingface data/
+│   └── mimic_cxr_with_chexbert_labels.ipynb    # CheXbert labeling of MIMIC-CXR
+└── models/
+    ├── image_only_baseline_HF.ipynb             # Image-only baseline
+    └── text_only_baseline_HF.ipynb              # Text-only baseline
+```
 
----
+## How to Run
 
-## 📊 Key Research Findings
-* **High Predictive Accuracy**: The models successfully categorized students based on their aptitude, with **Random Forest** and **SVM** showing the most robust performance across cross-validation folds.
-* **Indicator Analysis**: Found that performance in **"Intro to Programming"** was a primary indicator for the Information Management track, while **"Economics"** and **"Accounting"** were key for Finance and Business tracks.
-* **Balanced Evaluation**: Used **Macro F1-scores** to ensure the model performed well even for majors with fewer students (addressing data imbalance).
+All notebooks run on **Google Colab** with no local setup. Start with `Cross-Modal_Alignment_MIMIC-CXR.ipynb`, which covers preprocessing, training, evaluation, and Grad-CAM visualization. Baseline notebooks under `models/` can be run independently.
 
----
+## Full Report
 
-## 🚀 Future Applications
-1.  **Automated Advisory System**: Integrate the model into the university's course selection system to provide real-time suitability reports for freshmen.
-2.  **Dynamic Tracking**: Update predictions every semester to help students pivot their academic focus based on their latest growth.
-3.  **Career Path Mapping**: Extend the model to include internship and employment data to link academic suitability with career success.
+See [Final_Project_Report.pdf](./Final_Project_Report.pdf) for the complete write-up, including methodology, statistical significance testing, qualitative Grad-CAM analysis, limitations, and proposed future work.
 
----
+## Dependencies
+
+`torch`, `torchvision`, `transformers`, `datasets`, `scikit-learn`, `matplotlib`, `numpy`, `opencv-python`
