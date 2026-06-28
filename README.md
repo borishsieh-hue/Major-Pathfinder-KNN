@@ -1,7 +1,7 @@
 # Cross-Modal Alignment of Chest X-ray Images and Clinical Text for Interpretable Diagnosis
 
 Author - 
-**Cheng-Chin (Boris) Hsieh, Jenny Yang, Shirley Chiu, Chitse Chiang**
+**Cheng-Chin Hsieh, Jenny Yang, Shirley Chiu, Chitse Chiang**
 
 ## Overview
 
