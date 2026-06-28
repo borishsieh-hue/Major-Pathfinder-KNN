@@ -7,10 +7,6 @@ Author -
 
 This project builds a multimodal framework that integrates chest X-ray images and radiology reports to predict **Pneumonia** and **Pneumothorax**, using [CheXbert](https://arxiv.org/abs/2004.09167)-derived labels from the MIMIC-CXR dataset. We compare three fusion strategies — **early fusion, late fusion, and cross-attention** — and use Grad-CAM and attention-map alignment analysis to evaluate whether the model's predictions are grounded in genuine cross-modal reasoning or driven primarily by one modality.
 
-## My Contribution (Boris Hsieh)
-
-*(fill in — e.g. "Co-designed the cross-attention architecture and led the Grad-CAM / attention-alignment analysis (Section 4.4); implemented the bootstrap confidence interval significance testing (Section 4.2)")*
-
 ## Architecture
 
 - **Image encoder**: DenseNet-121, pretrained on MIMIC-CXR via `torchxrayvision`
